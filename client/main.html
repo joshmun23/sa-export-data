@@ -1,0 +1,72 @@
+<head>
+  <title>Papa Unparse</title>
+  <meta name ="viewport" content="width-device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+
+<template name="layout">
+  {{> yield}}
+</template>
+
+<template name="exportData">
+  <button class="ui right floated button" id="exportData">Export Data</button>
+</template>
+
+<template name="filterPosts">
+
+</template>
+
+<template name="posts">
+  {{> exportData }}
+  <br><br>
+  <table>
+    <tr>
+      <th>Category</th>
+      <th>Sub-Category</th>
+      <th>Quantity</th>
+      <th>Unit of Measure</th>
+      <th>Quality</th>
+      <th>Best By Date</th>
+      <th>Must Go By Date</th>
+      <th>Purpose</th>
+      <th>Unit Price</th>
+      <th>Amount</th>
+      <th>Location</th>
+      <th>Formatted Address</th>
+      <th>Delivery</th>
+      <th>Radius</th>
+    </tr>
+    {{#each posts}}
+    <tr>
+      <td>{{category}}</td>
+      <td>{{subCategory}}</td>
+      <td>{{quantity}}</td>
+      <td>{{unitOfMeasure}}</td>
+      <td>{{quality}}</td>
+      <td>{{bestByDate._i}}</td>
+      <td>{{mustGoByDate._i}}</td>
+      <td>{{purpose}}</td>
+      <td>{{unitPrice}}</td>
+      <td>{{amount}}</td>
+      <td>{{location}}</td>
+      <td>{{formattedAddress}}</td>
+      <td>{{delivery}}</td>
+      <td>{{radius}}</td>
+    </tr>
+    {{/each}}
+  </table>
+</template>
+
+<!-- <template name="post">
+  <button id="export">Export</button>
+  <br>
+  {{#with contact}}
+  <div>
+    <p><b>Name:</b> {{name}}</p>
+    <p><b>Gender:</b> {{gender}}</p>
+    <p><b>Date of Affiliation:</b> {{formatDate createdAt}}</p>
+    <p><b>Country:</b> {{address.country}}</p>
+    <p><b>City:</b> {{address.city}}</p>
+  </div>
+  {{/with}}
+</template>
+ -->
