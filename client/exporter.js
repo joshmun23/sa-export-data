@@ -1,32 +1,10 @@
 MyAppExporter = {
-  exportAllPosts: function() {
+  exportAllPosts: function(data) {
     var self = this;
-    Meteor.call("exportAllPosts", function(error, data) {
+    var csv = Papa.unparse(data);
 
-      if ( error ) {
-        alert(error);
-        return false;
-      }
-
-      var csv = Papa.unparse(data);
-      self._downloadCSV(csv);
-    });
+    self._downloadCSV(csv);
   },
-
-  // exportContact: function(id) {
-  //   var self = this;
-  //   Meteor.call("exportContact", id, function(error, data) {
-
-  //     if ( error ) {
-  //       alert(error);
-  //       return false;
-  //     }
-
-  //     var csv = Papa.unparse(data);
-  //     self._downloadCSV(csv);
-  //   });
-  // },
-
   _downloadCSV: function(csv) {
     var blob = new Blob([csv]);
     var a = window.document.createElement("a");

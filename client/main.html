@@ -1,9 +1,15 @@
 <head>
-  <title>Papa Unparse</title>
+  <title>Export Data</title>
   <meta name ="viewport" content="width-device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 
 <template name="layout">
+  <div class="ui grid" style="margin-top: 5rem; z-index: 9999; position: absolute;">
+    <div class="sixteen wide column">
+      <div id="errors">
+      </div>
+    </div>
+  </div>
   {{> yield}}
 </template>
 
@@ -12,28 +18,41 @@
 </template>
 
 <template name="filterPosts">
+  <div class="ui grid">
+    <div class="eight wide column">
+      <select class="ui fluid search dropdown" multiple="">
+        <option value="">Select Categories</option>
+        {{ #each categoriesList }}
+          {{> postCategory }}
+        {{ /each }}
+      </select>
+    </div>
 
+
+    <div class="four wide column">
+      <button class="ui right floated button" id="filterPosts">Filter Posts</button>
+    </div>
+  </div>
+</template>
+
+<template name="postCategory">
+  <option value={{ this }}>{{ this }}></option>
 </template>
 
 <template name="posts">
-  {{> exportData }}
+  <div class="ui grid">
+    <div class="twelve wide column">
+      {{> exportData }}
+    </div>
+  </div>
+
+  {{> filterPosts }}
   <br><br>
   <table>
     <tr>
-      <th>Category</th>
-      <th>Sub-Category</th>
-      <th>Quantity</th>
-      <th>Unit of Measure</th>
-      <th>Quality</th>
-      <th>Best By Date</th>
-      <th>Must Go By Date</th>
-      <th>Purpose</th>
-      <th>Unit Price</th>
-      <th>Amount</th>
-      <th>Location</th>
-      <th>Formatted Address</th>
-      <th>Delivery</th>
-      <th>Radius</th>
+      {{#each categoriesList}}
+      <th>{{this}}</th>
+      {{/each}}
     </tr>
     {{#each posts}}
     <tr>
