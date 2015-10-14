@@ -14,7 +14,6 @@ Meteor.publish('posts', function() {
     fields: {
       category: 1,
       subCategory: 1,
-      notes: 1,
       quantity: 1,
       unitOfMeasure: 1,
       quality: 1,

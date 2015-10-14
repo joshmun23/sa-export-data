@@ -11,7 +11,6 @@ Template.posts.onRendered(function(){
         .fadeOut(400, function(){
           $(this).empty()
         });
-
     }
     else {
       Session.set('allPosts', success)
@@ -30,7 +29,7 @@ Template.posts.helpers({
     // var categories = Object.getOwnPropertyNames(Posts.findOne());
     // return categories.slice(1, categories.length)
     return [
-      'Category', 'Sub-category', 'Notes', 'Quantity', 'Unit of Measure',
+      'Category', 'Sub-category', 'Quantity', 'Unit of Measure',
       'Quality', 'Unit Price', 'Amount', 'Best by Date', 'Must go by Date'
     ]
   }

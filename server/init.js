@@ -1,6 +1,6 @@
 Meteor.startup(function() {
   var categories = [
-    { name: 'bulk/mixed',
+    { name: 'Bulk/Mixed',
       subCategories: [
         'Bulk/Mixed',
         'Bakery Items',
@@ -19,7 +19,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'bakery items',
+    { name: 'Bakery Items',
       subCategories: [
         'Bakery Desserts',
         'Bread',
@@ -30,7 +30,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'beverages',
+    { name: 'Beverages',
       subCategories: [
         'Bulk or Mixed Beverage',
         'Coffee & Tea',
@@ -42,7 +42,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'breakfast items',
+    { name: 'Breakfast Items',
       subCategories: [
         'Bulk or Mixed Breakfast Items',
         'Cereal',
@@ -51,7 +51,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'canned goods',
+    { name: 'Canned Goods',
       subCategories: [
         'Bulk or Mixed Canned Goods',
         'Canned Beans',
@@ -62,7 +62,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'dairy & eggs',
+    { name: 'Dairy & Eggs',
       subCategories: [
         'Bulk or Mixed Dairy & Egg',
         'Butter',
@@ -75,7 +75,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'dry goods & pasta',
+    { name: 'Dry Goods & Pasta',
       subCategories: [
         'Bulk or Mixed Dry Goods & Pasta',
         'Flour',
@@ -86,7 +86,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'frozen items',
+    { name: 'Frozen Items',
       subCategories: [
         'Bulk or Mixed Frozen Items',
         'Frozen Appetizers',
@@ -101,7 +101,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'meat & seafood',
+    { name: 'Meat & Seafood',
       subCategories: [
         'Bulk or Mixed Meat & Seafood',
         'Frozen Seafood',
@@ -118,12 +118,12 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'organic waste',
+    { name: 'Organic Waste',
       subCategories: [
         'Other'
       ]
     },
-    { name: 'pantry items',
+    { name: 'Pantry Items',
       subCategories: [
         'Baking Supplies',
         'Bulk or Mixed Pantry Items',
@@ -136,7 +136,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'prepared food',
+    { name: 'Prepared Food',
       subCategories: [
         'Bulk or Mixed Prepared Food',
         'Prepared Bakery Items',
@@ -155,7 +155,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'produce',
+    { name: 'Produce',
       subCategories: [
         'Bulk or Mixed Produce',
         'Fresh Fruits',
@@ -170,7 +170,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'snacks',
+    { name: 'Snacks',
       subCategories: [
         'Bulk or Mixed Snacks',
         'Chips & Pretzels',
@@ -180,7 +180,7 @@ Meteor.startup(function() {
         'Other'
       ]
     },
-    { name: 'other',
+    { name: 'Other',
       subCategories: [
         'Other'
       ]
@@ -217,6 +217,16 @@ Meteor.startup(function() {
       var radius = Math.floor(
         Math.random() * 100
       );
+
+      var bestFakerDate = faker.date.past(),
+          mustFakerDate = faker.date.past();
+
+      var bestByDate = bestFakerDate.getMonth() + '/' + bestFakerDate.getDay() + '/'
+                       + bestFakerDate.getUTCFullYear();
+
+      var mustGoByDate = mustFakerDate.getMonth() + '/' + mustFakerDate.getDay() + '/'
+                       + mustFakerDate.getUTCFullYear();
+
       var addressName = faker.address.streetName(),
           streetAddress = faker.address.streetAddress(),
           city = faker.address.city(),
@@ -234,8 +244,8 @@ Meteor.startup(function() {
         quantity: quantity,
         unitOfMeasure: 'lbs',
         quality: qualities[qualityIndex],
-        bestByDate: faker.date.future(),
-        mustGoByDate: faker.date.future(),
+        bestByDate: bestByDate,
+        mustGoByDate: mustGoByDate,
         purpose: faker.lorem.sentence(),
         unitPrice: Math.round(unitPrice),
         amount: Math.round(unitPrice * quantity),
