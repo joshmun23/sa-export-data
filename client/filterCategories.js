@@ -1,4 +1,4 @@
-Template.filterPosts.helpers({
+Template.filterCategories.helpers({
   'categoriesList': function() {
     // fetch a list of all field names from Posts for dropdown
     // need to stringify the field names
@@ -7,13 +7,7 @@ Template.filterPosts.helpers({
   }
 })
 
-Template.filterPosts.events({
-  'click #filterPosts': function(e) {
-    debugger;
-  }
-})
-
-Template.filterPosts.onRendered(function () {
+Template.filterCategories.onRendered(function () {
   // add code for Semantic UI dropdowns
   $('.ui.dropdown')
     .dropdown()

@@ -21,6 +21,8 @@ Meteor.publish('posts', function() {
       amount: 1,
       bestByDate: 1,
       mustGoByDate: 1,
+      createdDate: 1,
+      completedDate: 1
     }
   })
 })

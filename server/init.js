@@ -219,13 +219,21 @@ Meteor.startup(function() {
       );
 
       var bestFakerDate = faker.date.past(),
-          mustFakerDate = faker.date.past();
+          mustFakerDate = faker.date.past(),
+          createdFakerDate = faker.date.past(),
+          completedFakerDate = faker.date.past();
 
-      var bestByDate = bestFakerDate.getMonth() + '/' + bestFakerDate.getDay() + '/'
+      var bestByDate = bestFakerDate.getUTCMonth() + '/' + bestFakerDate.getUTCDate() + '/'
                        + bestFakerDate.getUTCFullYear();
 
-      var mustGoByDate = mustFakerDate.getMonth() + '/' + mustFakerDate.getDay() + '/'
+      var mustGoByDate = mustFakerDate.getUTCMonth() + '/' + mustFakerDate.getUTCDate() + '/'
                        + mustFakerDate.getUTCFullYear();
+
+      var createdDate = createdFakerDate.getUTCMonth() + '/' + createdFakerDate.getUTCDate() + '/'
+                       + createdFakerDate.getUTCFullYear();
+
+      var completedDate = completedFakerDate.getUTCMonth() + '/' + completedFakerDate.getUTCDate() + '/'
+                       + completedFakerDate.getUTCFullYear();
 
       var addressName = faker.address.streetName(),
           streetAddress = faker.address.streetAddress(),
@@ -236,6 +244,7 @@ Meteor.startup(function() {
           latitude = faker.address.latitude(),
           longitude = faker.address.longitude(),
           loc = latitude + ',' + longitude;
+
 
       Posts.insert({
         notes: faker.lorem.sentences(),
@@ -262,7 +271,9 @@ Meteor.startup(function() {
         radius: radius,
         handling: 'some handling type',
         audience: 'some audience',
-        postImagesIds: faker.image.food()
+        postImagesIds: faker.image.food(),
+        createdDate: createdDate,
+        completedDate: completedDate
       })
     }
   }

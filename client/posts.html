@@ -1,18 +1,22 @@
 <template name="posts">
-  <div class="ui grid">
+  <!-- <div class="ui grid">
     <div class="twelve wide column">
       {{> exportData }}
     </div>
   </div>
 
-  {{> filterPosts }}
+  {{> filterPosts }} -->
+  {{> reportsBar }}
   <br><br>
-  <table>
+<table class="ui celled table">
+  <thead>
     <tr>
       {{#each categoriesList}}
       <th>{{this}}</th>
       {{/each}}
     </tr>
+  </thead>
+  <tbody>
     {{#each posts}}
     <tr>
       <td>{{category}}</td>
@@ -24,7 +28,11 @@
       <td>{{amount}}</td>
       <td>{{bestByDate}}</td>
       <td>{{mustGoByDate}}</td>
+      <td>{{createdDate}}</td>
+      <td>{{completedDate}}</td>
     </tr>
     {{/each}}
-  </table>
+  </tbody>
+</table>
+
 </template>

@@ -35,7 +35,6 @@ MyAppExporter = {
       document.body.removeChild(a);
   },
   toTitleCase: function(str) {
-
     var words = str.split(/(?=[A-Z])/);
     words[0] = words[0][0].toUpperCase() + words[0].slice(1, words[0].length + 1);
 

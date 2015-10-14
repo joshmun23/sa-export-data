@@ -29,8 +29,9 @@ Template.posts.helpers({
     // var categories = Object.getOwnPropertyNames(Posts.findOne());
     // return categories.slice(1, categories.length)
     return [
-      'Category', 'Sub-category', 'Quantity', 'Unit of Measure',
-      'Quality', 'Unit Price', 'Amount', 'Best by Date', 'Must go by Date'
+      'Category', 'Sub Category', 'Quantity', 'Unit Of Measure',
+      'Quality', 'Unit Price', 'Amount', 'Best By Date', 'Must Go By Date',
+      'Created Date', 'Completed Date'
     ]
   }
 });
