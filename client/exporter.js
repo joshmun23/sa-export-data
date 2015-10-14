@@ -1,7 +1,8 @@
 MyAppExporter = {
   exportAllPosts: function(data) {
+    debugger;
     var self = this;
-    var csv = Papa.unparse(data);
+    var csv = Papa.unparse(data.posts);
 
     self._downloadCSV(csv);
   },

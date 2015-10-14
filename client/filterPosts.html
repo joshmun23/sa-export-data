@@ -1,0 +1,21 @@
+<template name="filterPosts">
+  <div class="ui grid">
+    <div class="eight wide column">
+      <select class="ui fluid search dropdown" multiple="">
+        <option value="">Select Categories</option>
+        {{ #each categoriesList }}
+          {{> postCategory }}
+        {{ /each }}
+      </select>
+    </div>
+
+
+    <div class="four wide column">
+      <button class="ui right floated button" id="filterPosts">Filter Posts</button>
+    </div>
+  </div>
+</template>
+
+<template name="postCategory">
+  <option value={{ this }}>{{ this }}></option>
+</template>

@@ -1,0 +1,31 @@
+<template name="posts">
+  <div class="ui grid">
+    <div class="twelve wide column">
+      {{> exportData }}
+    </div>
+  </div>
+
+  {{> filterPosts }}
+  <br><br>
+  <table>
+    <tr>
+      {{#each categoriesList}}
+      <th>{{this}}</th>
+      {{/each}}
+    </tr>
+    {{#each posts}}
+    <tr>
+      <td>{{category}}</td>
+      <td>{{subCategory}}</td>
+      <td>{{notes}}</td>
+      <td>{{quantity}}</td>
+      <td>{{unitOfMeasure}}</td>
+      <td>{{quality}}</td>
+      <td>{{unitPrice}}</td>
+      <td>{{amount}}</td>
+      <td>{{bestByDate._i}}</td>
+      <td>{{mustGoByDate._i}}</td>
+    </tr>
+    {{/each}}
+  </table>
+</template>
