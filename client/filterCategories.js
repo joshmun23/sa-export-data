@@ -5,7 +5,7 @@ Template.filterCategories.helpers({
     var categories = Object.getOwnPropertyNames(Posts.findOne());
     return categories.slice(1, categories.length)
   }
-})
+});
 
 Template.filterCategories.onRendered(function () {
   // add code for Semantic UI dropdowns

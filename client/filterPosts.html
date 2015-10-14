@@ -1,11 +1,9 @@
 <template name="filterCategories">
   <div class="four wide column">
-    <label>Categories</label>
     <select class="ui fluid search dropdown" multiple="">
       <option value="">Select Categories</option>
-
       {{ #each categoriesList }}
-        <option value={{this}}>{{this}}</option>
+        {{> postCategory }}
       {{ /each }}
     </select>
   </div>

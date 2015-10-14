@@ -1,17 +1,24 @@
 <template name="reportsBar">
   <div class="ui grid">
     <div class="eight wide column ui right floated">
-      <div class="ui three buttons">
-        <button class="ui button">Sort</button>
+      <div class="ui two buttons">
         <button class="ui button active" id="filterPosts">Filter</button>
         {{> exportData}}
       </div>
     </div>
   </div>
-  <div class="ui grid" id="postFilters">
-    {{> filterCategories }}
-    {{> filterCategories }}
-    {{> filterCategories }}
-    {{> filterCategories }}
+  <div id="postsFiltersContainer" style="border: 1px solid green; display: none; padding: 1rem">
+    <div class="ui grid" id="postFilters">
+      {{> filterCategories }}
+      {{> filterCategories }}
+      {{> filterCategories }}
+      {{> filterCategories }}
+    </div>
+    <div class="ui grid" id="postFilters">
+      {{> filterCategories }}
+      {{> filterCategories }}
+      {{> filterCategories }}
+      {{> filterCategories }}
+    </div>
   </div>
 </template>
