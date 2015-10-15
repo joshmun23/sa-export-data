@@ -10,7 +10,7 @@
   <div id="postsFiltersContainer" style="border: 1px solid green; display: none; padding: 1rem">
     <div class="ui grid" id="postFilters">
       {{> filterCategories }}
-      {{> filterCategories }}
+      {{> filterSubCategories }}
       {{> filterCategories }}
       {{> filterCategories }}
     </div>
@@ -19,6 +19,12 @@
       {{> filterCategories }}
       {{> filterCategories }}
       {{> filterCategories }}
+    </div>
+    <div class="ui grid" id="postFiltersButtons">
+      <div class="sixteen wide column centered">
+        <button class="ui button" id="postsFiltersSubmit">Filter Posts</button>
+        <button class="ui button" id="postsFiltersReset">Reset Filters</button>
+      </div>
     </div>
   </div>
 </template>

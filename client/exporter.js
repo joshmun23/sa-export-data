@@ -39,6 +39,9 @@ MyAppExporter = {
     words[0] = words[0][0].toUpperCase() + words[0].slice(1, words[0].length + 1);
 
     return words.join(' ');
+  },
+  toCamelCase: function(str) {
+    // go from
   }
 }
 

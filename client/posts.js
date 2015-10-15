@@ -1,21 +1,21 @@
 Template.posts.onRendered(function(){
   // initialize queries
   Session.setDefault('postQueries', {});
-  var queries = Session.get('postQueries');
 
-  Meteor.call('setPosts', queries, function(err, success) {
-    if(err) {
-      $('#errors').append('<li>Could not retrieve Posts</li>')
-        .fadeIn()
-        .delay(1500)
-        .fadeOut(400, function(){
-          $(this).empty()
-        });
-    }
-    else {
-      Session.set('allPosts', success)
-    }
-  })
+  // save this server call/callback for error rendering (future purposes?)
+  // Meteor.call('setPosts', queries, function(err, success) {
+  //   if(err) {
+  //     $('#errors').append('<li>Could not retrieve Posts</li>')
+  //       .fadeIn()
+  //       .delay(1500)
+  //       .fadeOut(400, function(){
+  //         $(this).empty()
+  //       });
+  //   }
+  //   else {
+  //     Session.set('allPosts', success)
+  //   }
+  // })
 });
 
 Template.posts.helpers({

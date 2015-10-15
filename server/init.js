@@ -194,6 +194,15 @@ Meteor.startup(function() {
     'Prepared'
   ]
 
+  if (Categories.find().count() === 0) {
+    for(var i = 0; i < categories.length; i++) {
+      Categories.insert({
+        name: categories[i].name,
+        subCategories: categories[i].subCategories
+      })
+    }
+  }
+
   if (Posts.find().count() === 0 ) {
     for(var i=0; i < 64; i++) {
       var categoriesIndex = Math.floor(
