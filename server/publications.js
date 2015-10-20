@@ -1,10 +1,13 @@
 Meteor.publish('posts', function(postQueries) {
-  if (typeof(postQueries) === 'object' && typeof(postQueries.categories) === 'object') {
-    console.log('queries are: ' + postQueries.categories)
-    console.log('type of categories is: ' + typeof(postQueries.categories))
-
+  if(typeof(postQueries) === 'object' && !_.isEmpty(postQueries)) {
+    for(var i=0; i < postQueries.length; i++) {
+      console.log('postQueries[i].category is: ' + postQueries[i].category)
+      console.log('postQueries[i].subCategory is: ' + postQueries[i].category)
+      console.log('postQueries[i].quality is: ' + postQueries[i].quality)
+      console.log('postQueries[i].amount is: ' + postQueries.amount)
+    }
     return Posts.find({
-      category: {$in: postQueries.categories}
+      $or: postQueries
     },
     {
       fields: {
@@ -22,8 +25,6 @@ Meteor.publish('posts', function(postQueries) {
       }
     })
   }
-
-
 
   return Posts.find({}, {
     fields: {

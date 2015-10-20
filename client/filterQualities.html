@@ -1,0 +1,15 @@
+<template name="filterQualities">
+  <div class="eight wide column centered">
+    <div id="postsQualitiesFilters">
+      <label>Qualities</label>
+      <select class="ui fluid search dropdown qualities" multiple="">
+        <option value="">Select Qualities</option>
+
+        {{ #each qualitiesList }}
+          <option value={{this}}>{{this}}</option>
+        {{ /each }}
+      </select>
+    </div>
+  </div>
+</template>
+

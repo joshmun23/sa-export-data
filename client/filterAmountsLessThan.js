@@ -1,4 +1,4 @@
-Template.filterCategories.helpers({
+Template.filterAmountsLessThan.helpers({
   'categoriesList': function() {
     // fetch a list of all field names from Posts for dropdown
     // need to stringify the field names
@@ -15,5 +15,9 @@ Template.filterCategories.helpers({
 });
 
 Template.filterCategories.onRendered(function () {
+  // add code for Semantic UI dropdowns
+  $('.ui.dropdown')
+    .dropdown()
+  ;
 });
 

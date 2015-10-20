@@ -7,23 +7,34 @@
       </div>
     </div>
   </div>
-  <div id="postsFiltersContainer" style="border: 1px solid green; display: none; padding: 1rem">
-    <div class="ui grid" id="postFilters">
-      {{> filterCategories }}
-      {{> filterSubCategories }}
-      {{> filterCategories }}
-      {{> filterCategories }}
+  <div id="postsFiltersContainer" style="background-color:rgba(0,0,0,0.8); color: #3ABA49;padding:1rem">
+    <div class="ui grid postsFilters">
+      <div class="row">
+        {{> filterCategories }}
+        <!-- {{> filterSubCategories }} -->
+        {{> filterQualities }}
+      </div>
+      <div class="row" id="postsAmountFilters">
+        {{> filterAmountsLessThan }}
+        {{> filterAmountsGreaterThan }}
+        <!-- {{> filterAmountsBetween }} -->
+      </div>
+      <div class="row" id="postsDateFilters">
+        {{> filterCreatedDateBefore }}
+        {{> filterCreatedDateAfter }}
+      </div>
     </div>
-    <div class="ui grid" id="postFilters">
-      {{> filterCategories }}
-      {{> filterCategories }}
-      {{> filterCategories }}
-      {{> filterCategories }}
-    </div>
+
     <div class="ui grid" id="postFiltersButtons">
-      <div class="sixteen wide column centered">
-        <button class="ui button" id="postsFiltersSubmit">Filter Posts</button>
-        <button class="ui button" id="postsFiltersReset">Reset Filters</button>
+      <div class="eight wide column">
+        <p style="text-align: center">
+        <button class="ui button centered" id="postsFiltersSubmit" style="background-color: #3ABA49 !important">Filter Posts</button>
+        </p>
+      </div>
+      <div class="eight wide column">
+        <p style="text-align: center">
+        <button class="ui button centered" id="postsFiltersReset" style="background-color: #3ABA49 !important">Reset Filters</button>
+        </p>
       </div>
     </div>
   </div>

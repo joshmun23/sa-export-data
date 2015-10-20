@@ -12,7 +12,6 @@ Template.filterSubCategories.helpers({
     });
     // flatten array
     postsFilterSubCategories = [].concat.apply([], postsFilterSubCategories)
-
     return postsFilterSubCategories
   }
 });
