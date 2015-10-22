@@ -281,8 +281,10 @@ Meteor.startup(function() {
         handling: 'some handling type',
         audience: 'some audience',
         postImagesIds: faker.image.food(),
-        createdDate: createdDate,
-        completedDate: completedDate
+        // createdDate: createdDate,
+        createdDate: createdFakerDate,
+        // completedDate: completedDate
+        completedDate: completedFakerDate
       })
     }
   }

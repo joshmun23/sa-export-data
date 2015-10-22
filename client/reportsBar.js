@@ -5,15 +5,26 @@ Template.reportsBar.events({
   'click #filterPosts': function() {
     $('#postsFiltersContainer').slideToggle();
   },
-  'click #postsFiltersSubmit': function() {
+  // 'click i.glyphicon-calendar': function(e) {
+  //   $('#postsFiltersSubmit').prop('disabled', false);
+  //   debugger;
+  // },
+  'click #postsFiltersSubmit': function(e) {
+    e.preventDefault();
     var categoriesOptions = $('#postsCategoriesFilters a'),
         subCategoriesOptions = $('#postsFiltersContainer .postsSubCategoriesFilters a'),
         qualitiesOptions = $('#postsQualitiesFilters a'),
         amountsLessThan = $('#postsAmountsFiltersLessThan input:not([value=""])'),
         amountsGreaterThan = $('#postsAmountsFiltersGreaterThan input:not([value=""])'),
         postQueries = [];
+    var dates = {
+      createdBefore: $('.input-group.datetimepicker.filterCreatedDateBefore input.set-due-date').val(),
+      createdAfter: $('.input-group.datetimepicker.filterCreatedDateAfter input.set-due-date').val(),
+      completedBefore: $('.input-group.datetimepicker.filterCompletedDateBefore input.set-due-date').val(),
+      completedAfter: $('.input-group.datetimepicker.filterCompletedDateAfter input.set-due-date').val()
+    }
 
-    // check for existing amount queries
+    // check for existing amount&date queries
     var amountQueries = _.chain(postQueries)
                          .pluck('amount')
                          .compact()
@@ -23,6 +34,26 @@ Template.reportsBar.events({
     var amountsLessThanIdx;
     var amountsGreaterThanExists = false;
     var amountsGreaterThanIdx;
+
+    var createdDateQueries = _.chain(postQueries)
+                              .pluck('createdDate')
+                              .compact()
+                              .value();
+
+    var completedDateQueries = _.chain(postQueries)
+                              .pluck('completedDate')
+                              .compact()
+                              .value();
+
+    var createdDateBeforeExists = false,
+        createdDateBeforeIdx,
+        createdDateAfterExists  = false,
+        createdDateAfterIdx;
+
+    var completedDateBeforeExists = false,
+        completedDateBeforeIdx,
+        completedDateAfterExists  = false,
+        completedDateAfterIdx;
 
     amountQueries = _.each(amountQueries, function(val, key) {
       if(val['$lt']) {
@@ -34,7 +65,30 @@ Template.reportsBar.events({
         amountsGreaterThanIdx = key;
       }
     })
-    // end check for amount queries
+
+    createdDateQueries = _.each(createdDateQueries, function(val, key) {
+      if(val['$lt']) {
+        createdDateBeforeExists = true;
+        createdDateBeforeIdx = key;
+      }
+      if(val['$gt']) {
+        createdDateAfterExists = true;
+        createdDateAfterIdx = key;
+      }
+    })
+
+    completedDateQueries = _.each(completedDateQueries, function(val, key) {
+      if(val['$lt']) {
+        completedDateBeforeExists = true;
+        completedDateBeforeIdx = key;
+      }
+      if(val['$gt']) {
+        completedDateBeforeIdx = true;
+        completedDateAfterIdx = key;
+      }
+    })
+
+    // end check for amount&date queries
 
     if(categoriesOptions.length > 0) {
       for(var i = 0; i < categoriesOptions.length; i++) {
@@ -84,7 +138,67 @@ Template.reportsBar.events({
       }
     }
 
-    Session.set('postQueries', postQueries);
+    if(dates.createdBefore && dates.createdBefore.value !== '') {
+      var convertedDate = moment.utc(dates.createdBefore)._d
+      debugger;
+      if(createdDateBeforeExists) {
+        postQueries[createdDateBeforeIdx].createdDate = {
+          $lt: convertedDate
+        }
+      } else {
+        postQueries.push({
+          'createdDate': { $lt: convertedDate }
+        })
+      }
+    }
+
+    if(dates.createdAfter && dates.createdAfter.value !== '') {
+      var convertedDate = moment.utc(dates.createdAfter)._d
+      debugger;
+      if(createdDateAfterExists) {
+        postQueries[createdDateAfterIdx].createdDate = {
+          $gt: convertedDate
+        }
+      } else {
+        postQueries.push({
+          'createdDate': { $gt: convertedDate }
+        })
+      }
+    }
+
+    if(dates.completedBefore && dates.completedBefore.value !== '') {
+      var convertedDate = moment.utc(dates.completedBefore)._d
+      debugger;
+      if(completedDateBeforeExists) {
+        postQueries[completedDateBeforeIdx].completedDate = {
+          $lt: convertedDate
+        }
+      } else {
+        postQueries.push({
+          'completedDate': { $lt: convertedDate }
+        })
+      }
+    }
+
+    if(dates.completedAfter && dates.completedAfter.value !== '') {
+      var convertedDate = moment.utc(dates.completedAfter)._d
+      debugger;
+      if(completedDateAfterExists) {
+        postQueries[completedDateAfterIdx].completedDate = {
+          $gt: convertedDate
+        }
+      } else {
+        postQueries.push({
+          'completedDate': { $gt: convertedDate }
+        })
+      }
+    }
+
+    if(_.size(postQueries)) {
+      debugger;
+
+      Session.set('postQueries', postQueries);
+    }
   },
   'click #postsFiltersReset': function() {
     Session.set('postQueries', []);
@@ -93,6 +207,8 @@ Template.reportsBar.events({
 
 Template.reportsBar.onRendered(function () {
   Session.setDefault('postQueries', []);
+
+  // input previous queries into each field
   var postQueries = Session.get('postQueries'),
       selectedQueries = {};
   if(_.size(postQueries)) {
@@ -109,6 +225,14 @@ Template.reportsBar.onRendered(function () {
         selectedQueries.amounts = selectedQueries.amounts ? selectedQueries.amounts : [];
         selectedQueries.amounts.push(val['amount'])
       }
+      if(val['createdDate']) {
+        selectedQueries.createdDate = selectedQueries.createdDate ? selectedQueries.createdDate : [];
+        selectedQueries.createdDate.push(val['createdDate'])
+      }
+      if(val['completedDate']) {
+        selectedQueries.completedDate = selectedQueries.completedDate ? selectedQueries.createdDate : [];
+        selectedQueries.completedDate.push(val['completedDate'])
+      }
     })
 
     _.each(selectedQueries.amounts, function(val, key) {
@@ -119,12 +243,55 @@ Template.reportsBar.onRendered(function () {
         $('#postsAmountsFiltersGreaterThan input').val(val['$gt'])
       }
     })
+
+    _.each(selectedQueries.createdDate, function(val, key) {
+      if(val['$lt']) {
+        var formattedDate = moment.utc(val['$lt']).format('MM/DD/YYYY');
+        $('.datetimepicker.filterCreatedDateBefore input').val(formattedDate)
+      }
+      if(val['$gt']) {
+        var formattedDate = moment.utc(val['$gt']).format('MM/DD/YYYY');
+        $('.datetimepicker.filterCreatedDateAfter input').val(formattedDate)
+      }
+    })
+
+    _.each(selectedQueries.completedDate, function(val, key) {
+      if(val['$lt']) {
+        var formattedDate = moment.utc(val['$lt']).format('MM/DD/YYYY');
+        $('.datetimepicker.filterCompletedDateBefore input').val(formattedDate)
+      }
+      if(val['$gt']) {
+        var formattedDate = moment.utc(val['$gt']).format('MM/DD/YYYY');
+        $('.datetimepicker.filterCompletedDateAfter input').val(formattedDate)
+      }
+    })
+    debugger;
   }
 
-  $('.ui.dropdown.categories')
-    .dropdown('set selected', selectedQueries.categories)
-  ;
-  $('.ui.dropdown.qualities')
-    .dropdown('set selected', selectedQueries.qualities)
-  ;
+  $('.ui.dropdown.categories').dropdown('set selected', selectedQueries.categories);
+  $('.ui.dropdown.qualities').dropdown('set selected', selectedQueries.qualities);
+
+  $('.datetimepicker.filterCreatedDateBefore').datetimepicker({
+    format: 'MM/DD/YYYY'
+  });
+  $('.datetimepicker.filterCreatedDateAfter').datetimepicker({
+    format: 'MM/DD/YYYY'
+  });
+  $('.datetimepicker.filterCompletedDateBefore').datetimepicker({
+    format: 'MM/DD/YYYY'
+  });
+  $('.datetimepicker.filterCompletedDateAfter').datetimepicker({
+    format: 'MM/DD/YYYY'
+  });
+
+  var parsleyConfig = {
+    errorsContainer: function(pEle) {
+      var $err = pEle.$element.siblings('.errorBlock');
+      console.log($err);
+      return $err;
+    },
+    trigger: 'change'
+  }
+  debugger;
+  var $parsley = $('#postsFiltersQueries').parsley(parsleyConfig);
 });

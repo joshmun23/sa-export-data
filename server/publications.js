@@ -4,7 +4,8 @@ Meteor.publish('posts', function(postQueries) {
       console.log('postQueries[i].category is: ' + postQueries[i].category)
       console.log('postQueries[i].subCategory is: ' + postQueries[i].category)
       console.log('postQueries[i].quality is: ' + postQueries[i].quality)
-      console.log('postQueries[i].amount is: ' + postQueries.amount)
+      console.log('postQueries[i].amount is: ' + postQueries[i].amount)
+      console.log('postQueries[i].createdDate is: ' + postQueries[i].createdDate)
     }
     return Posts.find({
       $or: postQueries

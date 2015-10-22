@@ -1,6 +1,8 @@
 Template.filterCreatedDateAfter.helpers({
 });
 
+Template.filterCreatedDateAfter.events({
+});
+
 Template.filterCreatedDateAfter.onRendered(function() {
-    this.$('.datetimepicker.filterCreatedDateAfter').datetimepicker();
 });

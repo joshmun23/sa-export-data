@@ -1,9 +1,15 @@
 <template name="filterAmountsLessThan">
+  <style>
+    .error-block {
+      color: red;
+    }
+  </style>
   <div class="four wide column centered">
     <label>Amounts Less Than</label>
+    <div id="errorsAmountsLessThan"></div>
     <div class="ui right labeled input" id="postsAmountsFiltersLessThan">
       <div class="ui label">$</div>
-      <input type="text" placeholder="Amount">
+      <input type="text" placeholder="Amount" data-parsley-type="number" data-parsley-range="[0,1000000]" data-parsley-errors-container="#errorsAmountsLessThan">
       <div class="ui basic label">.00</div>
     </div>
   </div>

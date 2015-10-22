@@ -13,11 +13,3 @@ Template.filterAmountsLessThan.helpers({
     return postsFilterCategories
   }
 });
-
-Template.filterCategories.onRendered(function () {
-  // add code for Semantic UI dropdowns
-  $('.ui.dropdown')
-    .dropdown()
-  ;
-});
-
