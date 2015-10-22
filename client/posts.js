@@ -1,7 +1,11 @@
 Template.posts.onRendered(function(){
   // initialize queries
-  Session.setDefault('postQueries', {});
+  $("#reportsPostsTable").tablesorter({
+    theme : 'blue',
 
+    // change the default sorting order from 'asc' to 'desc'
+    sortInitialOrder: "desc"
+  });
   // save this server call/callback for error rendering (future purposes?)
   // Meteor.call('setPosts', queries, function(err, success) {
   //   if(err) {
@@ -19,8 +23,49 @@ Template.posts.onRendered(function(){
 });
 Template.posts.events({
   'click th': function(e) {
-    $('#reportsPostsTable').tablesort();
-    debugger;
+    var outerTarget = e.target;
+    var addOrChangeArrow = setTimeout(function(){
+      var selectedHeader,
+          checkHeaderElement,
+          selectedHeaderIndex;
+
+      // wait until the sorted header element is found
+      while(true) {
+        checkHeaderElement = _.contains(['descending', 'ascending'], $(outerTarget).attr('aria-sort'))
+        if(checkHeaderElement) {
+          selectedHeader = $(outerTarget)
+          selectedHeaderIndex = selectedHeader.attr('data-column')
+          break;
+        } else {
+          outerTarget = outerTarget.parentElement
+        }
+      }
+
+      // add/remove arrows as appropriate
+      if(checkHeaderElement) {
+        clearAllArrows('#reportsPostsTable i.chevron')
+        if(selectedHeader.attr('aria-sort') === 'descending') {
+          toggleSortArrow(selectedHeader.children(), selectedHeaderIndex, 'desc')
+        } else if(selectedHeader.attr('aria-sort') === 'ascending') {
+          toggleSortArrow(selectedHeader.children(), selectedHeaderIndex, 'asc')
+        }
+        return console.log('arrow changed')
+      }
+      // re-run function until an arrow is added by tablesort package
+      addOrChangeArrow
+    }, 100)
+
+    var toggleSortArrow = function(target, targetIdx, direction) {
+      if(direction === 'desc') {
+        target.append('<span id=' + targetIdx + ' style="float:right"><i class="chevron down icon"></i></span>')
+      } else if (direction === 'asc') {
+        target.append('<span id=' + targetIdx + ' style="float:right"><i class="chevron up icon"></i></span>')
+      }
+    };
+
+    var clearAllArrows = function(selector) {
+      $(selector).remove();
+    }
   }
 })
 Template.posts.helpers({

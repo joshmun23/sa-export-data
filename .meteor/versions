@@ -3,6 +3,7 @@ accounts-ui@1.1.6
 accounts-ui-unstyled@1.1.8
 aldeed:simple-schema@1.3.3
 almogdesign:parsley.js@1.1.7
+andrei:tablesorter@0.0.1
 autoupdate@1.2.3
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
