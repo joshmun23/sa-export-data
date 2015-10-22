@@ -11,6 +11,10 @@ Template.reportsBar.events({
   // },
   'click #postsFiltersSubmit': function(e) {
     e.preventDefault();
+    // prevent script if any errors on page
+    if(_.size($('.parsley-errors-list.filled'))) {
+      return console.log('There are errors on the page')
+    }
     var categoriesOptions = $('#postsCategoriesFilters a'),
         subCategoriesOptions = $('#postsFiltersContainer .postsSubCategoriesFilters a'),
         qualitiesOptions = $('#postsQualitiesFilters a'),
@@ -140,7 +144,7 @@ Template.reportsBar.events({
 
     if(dates.createdBefore && dates.createdBefore.value !== '') {
       var convertedDate = moment.utc(dates.createdBefore)._d
-      debugger;
+
       if(createdDateBeforeExists) {
         postQueries[createdDateBeforeIdx].createdDate = {
           $lt: convertedDate
@@ -154,7 +158,7 @@ Template.reportsBar.events({
 
     if(dates.createdAfter && dates.createdAfter.value !== '') {
       var convertedDate = moment.utc(dates.createdAfter)._d
-      debugger;
+
       if(createdDateAfterExists) {
         postQueries[createdDateAfterIdx].createdDate = {
           $gt: convertedDate
@@ -168,7 +172,7 @@ Template.reportsBar.events({
 
     if(dates.completedBefore && dates.completedBefore.value !== '') {
       var convertedDate = moment.utc(dates.completedBefore)._d
-      debugger;
+
       if(completedDateBeforeExists) {
         postQueries[completedDateBeforeIdx].completedDate = {
           $lt: convertedDate
@@ -265,23 +269,26 @@ Template.reportsBar.onRendered(function () {
         $('.datetimepicker.filterCompletedDateAfter input').val(formattedDate)
       }
     })
-    debugger;
   }
 
   $('.ui.dropdown.categories').dropdown('set selected', selectedQueries.categories);
   $('.ui.dropdown.qualities').dropdown('set selected', selectedQueries.qualities);
 
   $('.datetimepicker.filterCreatedDateBefore').datetimepicker({
-    format: 'MM/DD/YYYY'
+    format: 'MM/DD/YYYY',
+    maxDate: new Date()
   });
   $('.datetimepicker.filterCreatedDateAfter').datetimepicker({
-    format: 'MM/DD/YYYY'
+    format: 'MM/DD/YYYY',
+    maxDate: new Date()
   });
   $('.datetimepicker.filterCompletedDateBefore').datetimepicker({
-    format: 'MM/DD/YYYY'
+    format: 'MM/DD/YYYY',
+    maxDate: new Date()
   });
   $('.datetimepicker.filterCompletedDateAfter').datetimepicker({
-    format: 'MM/DD/YYYY'
+    format: 'MM/DD/YYYY',
+    maxDate: new Date()
   });
 
   var parsleyConfig = {
@@ -292,6 +299,6 @@ Template.reportsBar.onRendered(function () {
     },
     trigger: 'change'
   }
-  debugger;
+
   var $parsley = $('#postsFiltersQueries').parsley(parsleyConfig);
 });

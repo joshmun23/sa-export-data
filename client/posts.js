@@ -17,7 +17,12 @@ Template.posts.onRendered(function(){
   //   }
   // })
 });
-
+Template.posts.events({
+  'click th': function(e) {
+    $('#reportsPostsTable').tablesort();
+    debugger;
+  }
+})
 Template.posts.helpers({
   posts: function() {
     // fetch queried posts for client

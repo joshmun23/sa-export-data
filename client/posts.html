@@ -3,31 +3,30 @@
   <br><br>
   <div class="ui warning message">Adding a classname of <code>ascending</code> or <code>descending</code> to the <code>th</code> will show the user the direction of sort. This example uses a modified version of the kylefox's <a href="https://github.com/kylefox/jquery-tablesort">tablesort plugin</a> to provide the proper class names.
 </div>
-<table class="ui sortable stackable striped celled table">
+<table class="ui sortable stackable striped celled table" id="reportsPostsTable">
   <thead>
     <tr>
       {{#each categoriesList}}
-      <th class="center aligned">{{this}}</th>
+      <th class="left aligned">{{this}}</th>
       {{/each}}
     </tr>
   </thead>
   <tbody>
     {{#each posts}}
     <tr>
-      <td class="center aligned">{{category}}</td>
-      <td class="center aligned">{{subCategory}}</td>
-      <td class="center aligned">{{quantity}}</td>
-      <td class="center aligned">{{unitOfMeasure}}</td>
-      <td class="center aligned">{{quality}}</td>
-      <td class="center aligned">${{unitPrice}}</td>
-      <td class="center aligned">${{amount}}</td>
-      <td class="right aligned">{{bestByDate}}</td>
-      <td class="right aligned">{{mustGoByDate}}</td>
-      <td class="right aligned">{{formatDate createdDate}}</td>
-      <td class="right aligned">{{formatDate completedDate}}</td>
+      <td class="left aligned">{{category}}</td>
+      <td class="left aligned">{{subCategory}}</td>
+      <td class="right aligned">{{quantity}}</td>
+      <td class="left aligned">{{unitOfMeasure}}</td>
+      <td class="left aligned">{{quality}}</td>
+      <td class="right aligned">${{unitPrice}}</td>
+      <td class="right aligned">${{amount}}.00</td>
+      <td class="center aligned">{{bestByDate}}</td>
+      <td class="center aligned">{{mustGoByDate}}</td>
+      <td class="center aligned">{{formatDate createdDate}}</td>
+      <td class="center aligned">{{formatDate completedDate}}</td>
     </tr>
     {{/each}}
   </tbody>
 </table>
-
 </template>
