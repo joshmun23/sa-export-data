@@ -5,10 +5,17 @@ Template.reportsBar.events({
   'click #filterPosts': function() {
     $('#postsFiltersContainer').slideToggle();
   },
-  // 'click i.glyphicon-calendar': function(e) {
-  //   $('#postsFiltersSubmit').prop('disabled', false);
-  //   debugger;
-  // },
+  'click .datetimepicker input': function(e) {
+    // $('#postsFiltersSubmit').prop('disabled', false);
+    var dateFilterClass = _.last(e.target.parentElement.classList);
+    var selectedDateFilterIcon = $('.' + dateFilterClass + ' i');
+
+    // have calendar pop up when user clicks on input
+    selectedDateFilterIcon.trigger('click');
+  },
+  'keypress .datetimepicker input': function(e) {
+    e.preventDefault();
+  },
   'click #postsFiltersSubmit': function(e) {
     e.preventDefault();
     // prevent script if any errors on page

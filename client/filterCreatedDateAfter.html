@@ -3,7 +3,7 @@
     <label>Posts Created After:</label>
     <div class="input-group datetimepicker filterCreatedDateAfter">
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        <input disabled class="set-due-date form-control" type="text"/>
+        <input class="set-due-date form-control" id="createdDateGreaterThan" parsley-trigger="change" parsley-lessthan="createdDateLessThan" type="text"/>
     </div>
   </div>
 </template>
