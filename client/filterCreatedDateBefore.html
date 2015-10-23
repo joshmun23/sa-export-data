@@ -1,9 +1,10 @@
 <template name="filterCreatedDateBefore">
-  <div class="ui four wide column grid">
+  <div class="row" style="padding-left: 10%; padding-right: 10%">
     <label>Posts Created Before:</label>
+    <div id="errorsCreatedDateBefore"></div>
     <div class="input-group datetimepicker filterCreatedDateBefore">
       <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-      <input class="set-due-date form-control" type="text" id="createdDateLessThan" data-parsley-trigger="change" data-parsley-date/>
+      <input class="set-due-date form-control" type="text" id="createdDateLessThan" />
     </div>
   </div>
 </template>

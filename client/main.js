@@ -9,7 +9,6 @@ Template.registerHelper('formatNumbers', function(value) {
   if(typeof(originalNumberString) === 'number'){
     originalNumberString = String(originalNumberString)
   }
-  debugger;
   if(originalNumberString.length > 3) {
 
 
@@ -24,4 +23,3 @@ Template.registerHelper('formatNumbers', function(value) {
   }
   // originalNumberString = originalNumberString.split('').jo
 })
-

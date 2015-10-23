@@ -1,5 +1,5 @@
 <template name="reportsBar">
-  <div class="ui grid">
+  <div class="ui grid" style="border-bottom: 1px solid #C0C1C2">
     <div class="eight wide column ui right floated">
       <div class="ui two buttons">
         <button class="ui button active" id="filterPosts">Filter</button>
@@ -7,37 +7,41 @@
       </div>
     </div>
   </div>
-  <div id="postsFiltersContainer" style="background-color:#C0C1C2;padding-top:1rem; padding-left: 5rem; padding-right: 5rem; padding-bottom:1rem">
+  <div id="postsFiltersContainer" style="border-top: 1px solid black;background-color:#CCCCCC;padding-top:1rem; padding-left: 5rem; padding-right: 5rem; padding-bottom:1rem; border-top:">
     <form id="postsFiltersQueries" data-validate-parsley>
       <div class="ui grid postsFilters stackable">
-        <div class="row">
+        <div class="eight wide column centered">
           {{> filterCategories }}
+        </div>
+        <div class="eight wide column centered">
           <!-- {{> filterSubCategories }} -->
           {{> filterQualities }}
         </div>
-        <div class="row" id="postsAmountFilters">
-          {{> filterAmountsLessThan }}
-          {{> filterAmountsGreaterThan }}
-          <!-- {{> filterAmountsBetween }} -->
-        </div>
-        <div class="row" id="postsDateFilters">
-          {{> filterCreatedDateBefore }}
-          {{> filterCreatedDateAfter }}
-          {{> filterCompletedDateBefore }}
-          {{> filterCompletedDateAfter }}
-        </div>
       </div>
+        <div class="ui grid stackable equal width">
+          <div class="four wide column">
+            {{> filterCreatedDateBefore }}
+            {{> filterCreatedDateAfter }}
+          </div>
+          <div class="four wide column">
+            {{> filterCompletedDateBefore }}
+            {{> filterCompletedDateAfter }}
+          </div>
+          <div class="four wide column centered">
+            {{> filterAmountsLessThan }}
+          </div>
+          <div class="four wide column centered">
+            {{> filterAmountsGreaterThan }}
+          </div>
+        </div>
+          <!-- {{> filterAmountsBetween }} -->
 
       <div class="ui grid" id="postFiltersButtons">
-        <div class="eight wide column">
-          <p style="text-align: center">
-          <button class="ui button centered" id="postsFiltersSubmit" style="background-color: #3ABA49 !important">Filter Posts</button>
-          </p>
-        </div>
-        <div class="eight wide column">
-          <p style="text-align: center">
-          <button class="ui button centered" id="postsFiltersReset" style="background-color: #3ABA49 !important">Reset Filters</button>
-          </p>
+        <div class="eight wide column right floated">
+          <div class="ui two buttons">
+            <button class="ui button centered" id="postsFiltersSubmit" style="background-color: #3ABA49 !important; padding-left: 10%; padding-right: 10%; color: #fff">Filter Posts</button>
+            <button class="ui button centered" id="postsFiltersReset" style="background-color: #D64842 !important; padding-left: 10%; padding-right: 10%; color: #fff">Reset Filters</button>
+          </div>
         </div>
       </div>
     </form>

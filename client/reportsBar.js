@@ -16,12 +16,77 @@ Template.reportsBar.events({
   'keypress .datetimepicker input': function(e) {
     e.preventDefault();
   },
+  'focusout input.set-due-date': function(e) {
+    var className = _.last(e.target.parentElement.classList),
+        beforeDate,
+        afterDate,
+        errorDivID,
+        errorMessage = 'This date cannot be before than the before date';
+    var parsleyErrorsHTML = '<ul class="parsley-errors-list filled"><li class="parsley-type">' + errorMessage + '</li></ul>'
+    debugger;
+    switch(className) {
+      case 'filterCreatedDateBefore': {
+        if($('.filterCreatedDateAfter input').val()) {
+          var afterDateValue = $('.filterCreatedDateAfter input').val()
+          beforeDate = moment.utc(e.target.value);
+          afterDate = moment.utc(afterDateValue);
+          errorDivID = "#errorsCreatedDateAfter";
+        }
+        break;
+      };
+      case 'filterCreatedDateAfter': {
+        if($('.filterCreatedDateBefore input').val()) {
+          var beforeDateValue = $('.filterCreatedDateBefore input').val();
+          beforeDate = moment.utc(beforeDateValue);
+          afterDate = moment.utc(e.target.value);
+          errorDivID = "#errorsCreatedDateAfter";
+        }
+        break;
+      };
+      case 'filterCompletedDateBefore': {
+        if($('.filterCompletedDateAfter input').val()) {
+          var afterDateValue = $('.filterCompletedDateAfter input').val()
+          beforeDate = moment.utc(e.target.value);
+          afterDate = moment.utc(afterDateValue);
+          errorDivID = "#errorsCompletedDateAfter";
+        }
+        break;
+      };
+      case 'filterCompletedDateAfter': {
+        if($('.filterCompletedDateBefore input').val()) {
+          var beforeDateValue = $('.filterCompletedDateBefore input').val();
+          beforeDate = moment.utc(beforeDateValue);
+          afterDate = moment.utc(e.target.value);
+          errorDivID = "#errorsCompletedDateAfter";
+        }
+        break;
+      };
+    }
+    if(beforeDate && afterDate) {
+      if(beforeDate > afterDate) {
+        // input some message
+        debugger;
+        if(!_.size($(errorDivID + ' li'))) {
+          debugger;
+          $(errorDivID).append(parsleyErrorsHTML)
+        }
+      } else if(beforeDate < afterDate) {
+        if(className === 'filterCreatedDateBefore' || className === 'filterCreatedDateAfter') {
+          $('#errorsCreatedDateAfter li').remove()
+        } else if(className === 'filterCompletedDateBefore' || className === 'filterCompletedDateAfter') {
+          $('#errorsCompletedDateAfter li').remove()
+        }
+      }
+    }
+  },
   'click #postsFiltersSubmit': function(e) {
-    e.preventDefault();
     // prevent script if any errors on page
+    e.preventDefault();
     if(_.size($('.parsley-errors-list.filled'))) {
       return console.log('There are errors on the page')
     }
+    // end prevent script
+
     var categoriesOptions = $('#postsCategoriesFilters a'),
         subCategoriesOptions = $('#postsFiltersContainer .postsSubCategoriesFilters a'),
         qualitiesOptions = $('#postsQualitiesFilters a'),
@@ -193,7 +258,6 @@ Template.reportsBar.events({
 
     if(dates.completedAfter && dates.completedAfter.value !== '') {
       var convertedDate = moment.utc(dates.completedAfter)._d
-      debugger;
       if(completedDateAfterExists) {
         postQueries[completedDateAfterIdx].completedDate = {
           $gt: convertedDate
@@ -206,8 +270,6 @@ Template.reportsBar.events({
     }
 
     if(_.size(postQueries)) {
-      debugger;
-
       Session.set('postQueries', postQueries);
     }
   },
