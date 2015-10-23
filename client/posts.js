@@ -1,11 +1,11 @@
 Template.posts.onRendered(function(){
   // initialize queries
   $("#reportsPostsTable").tablesorter({
-    theme : 'blue',
-
-    // change the default sorting order from 'asc' to 'desc'
-    sortInitialOrder: "desc"
+    theme : 'green'
   });
+  // sort first item
+  $('#reportsPostsTable th:first-child').trigger('click');
+
   // save this server call/callback for error rendering (future purposes?)
   // Meteor.call('setPosts', queries, function(err, success) {
   //   if(err) {

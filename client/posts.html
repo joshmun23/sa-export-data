@@ -1,9 +1,7 @@
 <template name="posts">
   {{> reportsBar }}
-  <br><br>
-  <div class="ui warning message">Adding a classname of <code>ascending</code> or <code>descending</code> to the <code>th</code> will show the user the direction of sort. This example uses a modified version of the kylefox's <a href="https://github.com/kylefox/jquery-tablesort">tablesort plugin</a> to provide the proper class names.
-</div>
-<table class="ui stackable striped celled table tablesorter" id="reportsPostsTable">
+
+<table class="ui stackable striped celled small table tablesorter" id="reportsPostsTable">
   <thead>
     <tr>
       {{#each categoriesList}}
