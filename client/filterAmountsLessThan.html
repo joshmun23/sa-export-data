@@ -1,18 +1,11 @@
 <template name="filterAmountsLessThan">
-  <style>
-    .error-block {
-      color: red;
-    }
-  </style>
-  <div class="row" style="padding-left: 10%; padding-right: 10%">
-    <!-- <div class="ui four column center aligned grid"> -->
-      <label>Amounts Less Than</label>
-      <div id="errorsAmountsLessThan"></div>
-      <div class="ui right labeled input fluid" id="postsAmountsFiltersLessThan">
-        <div class="ui label">$</div>
-        <input type="text" placeholder="Amount" data-parsley-type="number" data-parsley-range="[1,1000000]" data-parsley-errors-container="#errorsAmountsLessThan">
-        <div class="ui basic label">.00</div>
-      </div>
-    <!-- </div> -->
+  <div class="row tenPctPad">
+    <label>Amounts Less Than</label>
+    <div id="errorsAmountsLessThan"></div>
+    <div class="ui right labeled input fluid" id="postsAmountsFiltersLessThan">
+      <div class="ui label">$</div>
+      <input type="text" placeholder="Amount" data-parsley-type="number" data-parsley-range="[1,1000000]" data-parsley-errors-container="#errorsAmountsLessThan">
+      <div class="ui basic label">.00</div>
+    </div>
   </div>
 </template>

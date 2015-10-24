@@ -2,7 +2,7 @@ Template.reportsBar.helpers({
 });
 
 Template.reportsBar.events({
-  'click #filterPosts': function() {
+  'click #filterPostsTabButton': function() {
     $('#postsFiltersContainer').slideToggle();
   },
   'click .datetimepicker input': function(e) {
@@ -21,16 +21,16 @@ Template.reportsBar.events({
         beforeDate,
         afterDate,
         errorDivID,
-        errorMessage = 'This date cannot be before than the before date';
+        errorMessage = 'This date cannot be before the created before date';
     var parsleyErrorsHTML = '<ul class="parsley-errors-list filled"><li class="parsley-type">' + errorMessage + '</li></ul>'
-    debugger;
+
     switch(className) {
       case 'filterCreatedDateBefore': {
         if($('.filterCreatedDateAfter input').val()) {
           var afterDateValue = $('.filterCreatedDateAfter input').val()
           beforeDate = moment.utc(e.target.value);
           afterDate = moment.utc(afterDateValue);
-          errorDivID = "#errorsCreatedDateAfter";
+          errorDivID.created.before = "#errorsCreatedDateAfter";
         }
         break;
       };
@@ -72,9 +72,9 @@ Template.reportsBar.events({
         }
       } else if(beforeDate < afterDate) {
         if(className === 'filterCreatedDateBefore' || className === 'filterCreatedDateAfter') {
-          $('#errorsCreatedDateAfter li').remove()
+          $('#errorsCreatedDateAfter .parsley-errors-list.filled').remove()
         } else if(className === 'filterCompletedDateBefore' || className === 'filterCompletedDateAfter') {
-          $('#errorsCompletedDateAfter li').remove()
+          $('#errorsCompletedDateAfter .parsley-errors-list.filled').remove()
         }
       }
     }
@@ -281,7 +281,7 @@ Template.reportsBar.events({
 Template.reportsBar.onRendered(function () {
   Session.setDefault('postQueries', []);
 
-  // input previous queries into each field
+  // retrieve previous queries to render to user
   var postQueries = Session.get('postQueries'),
       selectedQueries = {};
   if(_.size(postQueries)) {
@@ -340,9 +340,11 @@ Template.reportsBar.onRendered(function () {
     })
   }
 
+  // set previous dropdown queries in view
   $('.ui.dropdown.categories').dropdown('set selected', selectedQueries.categories);
   $('.ui.dropdown.qualities').dropdown('set selected', selectedQueries.qualities);
 
+  // set bootstrap calendar date picker
   $('.datetimepicker.filterCreatedDateBefore').datetimepicker({
     format: 'MM/DD/YYYY',
     maxDate: new Date()
@@ -360,6 +362,7 @@ Template.reportsBar.onRendered(function () {
     maxDate: new Date()
   });
 
+  // set custom errors container for amounts validation
   var parsleyConfig = {
     errorsContainer: function(pEle) {
       var $err = pEle.$element.siblings('.errorBlock');
@@ -369,5 +372,6 @@ Template.reportsBar.onRendered(function () {
     trigger: 'change'
   }
 
+  // load parsley
   var $parsley = $('#postsFiltersQueries').parsley(parsleyConfig);
 });
